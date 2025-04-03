@@ -1,9 +1,43 @@
 spring:
+  profiles:
+    active: ${ACTIVE_PROFILE:dev}
+
   datasource:
-    url: jdbc:mysql://mysql:3306/mydatabase
-    username: myuser
-    password: secret
+    url: jdbc:postgresql://${HOST}:${PORT}/${DB}
+    username: ${USERNAME}
+    password: ${PASSWORD}
   jpa:
+    generate-ddl: true
+    show-sql: true
     hibernate:
-      ddl-auto: update  # or create, create-drop, validate based on your needs
-    show-sql: true  # Set to true to log SQL queries
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        globally_quoted_identifiers: true
+
+  mail:
+    host: ${EMAIL_HOST}
+    port: ${EMAIL_PORT}
+    username: ${EMAIL_ID}
+    password: ${EMAIL_PASSWORD}
+    default-encoding: UTF-8
+    properties:
+      mail:
+        mime:
+          charset: UTF
+        smtp:
+          writetimeout: 10000
+          connectiontimeout: 10000
+          timeout: 10000
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    verify:
+      host: ${VERIFY_EMAIL_HOST}
+
+server:
+  port: ${SERVER_PORT:8080}
+

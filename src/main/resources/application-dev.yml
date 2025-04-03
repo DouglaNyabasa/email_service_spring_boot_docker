@@ -1,0 +1,17 @@
+#Database
+USERNAME: myuser
+PASSWORD: secret
+HOST: mysql
+PORT: 3306
+DB: mydatabase
+
+#Server
+SERVER_PORT: 9000
+ACTIVE_PROFILE: dev
+
+#Email Config
+EMAIL_HOST: smtp.gmail.com
+EMAIL_PORT: 587
+EMAIL_ID: douglasnyabasa400@gmail.com
+EMAIL_PASSWORD: pnqnuprzgdcrytvr
+VERIFY_EMAIL_HOST: http://localhost:${SERVER_PORT}
