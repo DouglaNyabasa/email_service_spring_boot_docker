@@ -10,7 +10,6 @@ import java.util.UUID;
 
 
 @NoArgsConstructor
-@Data
 @Entity
 @Table(name = "confirmations")
 public class Confirmation {
@@ -27,7 +26,39 @@ public class Confirmation {
     @JoinColumn(nullable = false,name = "user_id")
     private User user;
 
-    public Confirmation( User user) {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Confirmation(User user) {
        this.user = user;
        this.createdDate = LocalDateTime.now();
        this.token = UUID.randomUUID().toString();

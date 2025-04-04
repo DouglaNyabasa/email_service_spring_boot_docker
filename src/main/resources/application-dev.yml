@@ -1,17 +1,17 @@
-#Database
+# Database
 USERNAME: myuser
 PASSWORD: secret
-HOST: mysql
-PORT: 3306
+HOST: localhost # Update to your MySQL host
+PORT: 3306 # Default MySQL port
 DB: mydatabase
 
-#Server
+# Server
 SERVER_PORT: 9000
 ACTIVE_PROFILE: dev
 
-#Email Config
+# Email Config
 EMAIL_HOST: smtp.gmail.com
 EMAIL_PORT: 587
-EMAIL_ID: Your email
-EMAIL_PASSWORD: Your password
+EMAIL_ID: <BRO ENTER YOUR EMAIL HERE >
+EMAIL_PASSWORD: <YOUR GOOGLE ACCOUNT PASSWORD HERE TOO OKAY>
 VERIFY_EMAIL_HOST: http://localhost:${SERVER_PORT}

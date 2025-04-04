@@ -20,6 +20,7 @@ public class EmailServiceImpl implements EmailService {
 
     public static final String NEW_USER_ACCOUNT_VERIFICATION = "New User Account Verification";
     public static final String UTF_8_ENCODING = "UTF_8_ENCODING";
+    public static final String UTF_8 = "UTF-8";
     @Value("${spring.mail.verify.host}")
     private String host;
     @Value("${spring.mail.username}")
@@ -53,26 +54,44 @@ public class EmailServiceImpl implements EmailService {
     @Override
     @Async
     public void sendMimeMessageWithAttachment(String name, String to, String token) {
-        try{
+        try {
             MimeMessage message = getMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, UTF_8_ENCODING);
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
             helper.setPriority(1);
             helper.setSubject(NEW_USER_ACCOUNT_VERIFICATION);
             helper.setFrom(fromEmail);
             helper.setTo(to);
-            helper.setText(EmailUtils.getEmailMessage(name,host,token));
-            //add attachment
-            FileSystemResource cat = new FileSystemResource(new File(System.getProperty("user.home")+ "/Downloads/images/cat.jpg"));
-            FileSystemResource file = new FileSystemResource(new File(System.getProperty("user.home")+ "/Downloads/images/file.docx"));
-            helper.addAttachment(getContentId(cat.getFilename()), cat);
-            helper.addAttachment(getContentId(file.getFilename()), file);
+            helper.setText(EmailUtils.getEmailMessage(name, host, token));
+
+
+            String catFilePath = "/home/modestnerds/Downloads/email-service-spring-boot/src/main/java/com/example/emailservicespringboot/utils/images/cat.jpg";
+            String docFilePath = "/home/modestnerds/Downloads/email-service-spring-boot/src/main/java/com/example/emailservicespringboot/utils/images/files.docx";
+
+
+            FileSystemResource cat = new FileSystemResource(new File(catFilePath));
+            if (cat.exists()) {
+                helper.addAttachment(getContentId(cat.getFilename()), cat);
+            } else {
+                throw new RuntimeException("Attachment not found: " + catFilePath);
+            }
+
+
+            FileSystemResource file = new FileSystemResource(new File(docFilePath));
+            if (file.exists()) {
+                helper.addAttachment(getContentId(file.getFilename()), file);
+            } else {
+                throw new RuntimeException("Attachment not found: " + docFilePath);
+            }
+
             mailSender.send(message);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e.getMessage());
-        }
 
+            System.err.println("Failed to send email: " + e.getMessage());
+            throw new RuntimeException("Failed to send email: " + e.getMessage(), e);
+        }
     }
+
 
     private MimeMessage getMimeMessage() {
         return mailSender.createMimeMessage();
@@ -82,29 +101,7 @@ public class EmailServiceImpl implements EmailService {
         return "<" + fileName + ">";
     }
 
-//    @Override
-//    @Async
-//    public void sendMimeMessageWithEmbeddedImages(String name, String to, String token) {
-//        try{
-//            MimeMessage message = getMimeMessage();
-//            MimeMessageHelper helper = new MimeMessageHelper(message, true, UTF_8_ENCODING);
-//            helper.setPriority(1);
-//            helper.setSubject(NEW_USER_ACCOUNT_VERIFICATION);
-//            helper.setFrom(fromEmail);
-//            helper.setTo(to);
-//            helper.setText(EmailUtils.getEmailMessage(name,host,token));
-//            //add attachment
-//            FileSystemResource cat = new FileSystemResource(new File(System.getProperty("user.home")+ "/Downloads/images/cat.jpg"));
-//            FileSystemResource file = new FileSystemResource(new File(System.getProperty("user.home")+ "/Downloads/images/file.docx"));
-//            helper.addInline(cat.getFilename(), cat);
-//            helper.addInline(file.getFilename(), file);
-//            mailSender.send(message);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            throw new RuntimeException(e.getMessage());
-//        }
-//
-//    }
+
 
     @Override
     @Async
