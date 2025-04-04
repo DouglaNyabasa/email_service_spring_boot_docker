@@ -15,7 +15,7 @@ This Spring Boot application allows users to send emails with attachments or sim
 
 Before running the application, ensure you have the following:
 
-- **Docker**: Installed on your machine. You can download it from [Docker's official website](https://www.docker.com/get-started).
+- **Docker**: Installed on your machine. You can download it from [Docker's official website](https://docker.com/get-started).
 - **Docker Compose**: Included with Docker Desktop installations.
 - **Java 11 or higher**: Ensure Java is installed and configured on your system.
 - **Google Account**: With two-factor authentication enabled.
@@ -26,6 +26,7 @@ Before running the application, ensure you have the following:
    ```bash
    git clone https://github.com/DouglaNyabasa/email_service_spring_boot_docker.git
    cd email_service_spring_boot_docker
+
    
 2.Configure Application Properties:
 
