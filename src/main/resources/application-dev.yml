@@ -12,6 +12,6 @@ ACTIVE_PROFILE: dev
 #Email Config
 EMAIL_HOST: smtp.gmail.com
 EMAIL_PORT: 587
-EMAIL_ID: douglasnyabasa400@gmail.com
-EMAIL_PASSWORD: pnqnuprzgdcrytvr
+EMAIL_ID: Your email
+EMAIL_PASSWORD: Your password
 VERIFY_EMAIL_HOST: http://localhost:${SERVER_PORT}

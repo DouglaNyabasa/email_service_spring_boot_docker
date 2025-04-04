@@ -1,6 +1,4 @@
 package com.example.emailservicespringboot.model;
-
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
