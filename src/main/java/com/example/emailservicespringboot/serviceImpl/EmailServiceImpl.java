@@ -66,7 +66,7 @@ public class EmailServiceImpl implements EmailService {
 
 
             String catFilePath = "/home/modestnerds/Downloads/email-service-spring-boot/src/main/java/com/example/emailservicespringboot/utils/images/cat.jpg";
-            String docFilePath = "/home/modestnerds/Downloads/email-service-spring-boot/src/main/java/com/example/emailservicespringboot/utils/images/file.docx";
+            String docFilePath = "/home/modestnerds/Downloads/email-service-spring-boot/src/main/java/com/example/emailservicespringboot/utils/images/doc.docx";
 
 
             FileSystemResource cat = new FileSystemResource(new File(catFilePath));
